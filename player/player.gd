@@ -1,5 +1,9 @@
 extends KinematicBody2D
-var speed = 40
+
+export var speed: int = 40
+var is_freezed: bool = false
+
+onready var game = get_node( "/root/Game" )
 
 func _ready():
 	pass 
@@ -16,7 +20,7 @@ func _physics_process( delta ):
 	if Input.is_action_pressed( "right" ):
 		dir.x += 1
 	
-	if dir == Vector2.ZERO:
+	if not game.is_running or is_freezed or dir == Vector2.ZERO:
 		$AnimatedSprite.play( "idle" )
 		return
 	
