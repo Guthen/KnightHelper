@@ -1,12 +1,13 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://map/tileset.png" type="Texture" id=1]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://character/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/vkx_pixel.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/play.png" type="Texture" id=4]
 [ext_resource path="res://game/objects/BreakableWall.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/objects/BearTrap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game/game.gd" type="Script" id=7]
+[ext_resource path="res://character/goblin/Goblin.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -124,16 +125,20 @@ format = 1
 tile_data = PoolIntArray( 0, 0, 65538, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 65540, 9, 0, 65538, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 65540, 65536, 0, 65538, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65551, 0, 65540, 131072, 0, 65538, 131087, 0, 65540, 196608, 0, 65538, 196623, 0, 65540, 262144, 0, 65538, 262159, 0, 65540, 327680, 0, 65538, 327686, 0, 4, 327687, 0, 131075, 327688, 0, 131075, 327689, 0, 2, 327695, 0, 65540, 393216, 0, 131074, 393217, 0, 131075, 393218, 0, 131075, 393219, 0, 131075, 393220, 0, 131075, 393221, 0, 131075, 393222, 0, 131076, 393225, 0, 131074, 393226, 0, 131075, 393227, 0, 131075, 393228, 0, 131075, 393229, 0, 131075, 393230, 0, 131075, 393231, 0, 131076 )
 
 [node name="BreakableWall" parent="WallMap" instance=ExtResource( 5 )]
-position = Vector2( 104, 72 )
+position = Vector2( 152, 72 )
 
 [node name="BreakableWall2" parent="WallMap" instance=ExtResource( 5 )]
 position = Vector2( 104, 40 )
 
 [node name="BearTrap" parent="WallMap" instance=ExtResource( 6 )]
-position = Vector2( 136, 60 )
+position = Vector2( 128, 56 )
 
 [node name="Player" parent="WallMap" instance=ExtResource( 2 )]
 position = Vector2( 56, 56 )
+
+[node name="Goblin" parent="WallMap" instance=ExtResource( 8 )]
+position = Vector2( 200, 40 )
+is_looking_left = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

@@ -14,7 +14,7 @@ func _on_Area2D_body_entered( body ):
 		is_activated = true
 		$AnimatedSprite.set_frame( 1 )
 		
-		body.position = position + Vector2( 0, -10 )
+		body.position = position + Vector2( 0, -6 )
 		body.is_freezed = true
 		body.take_damage( 40 )
 		
