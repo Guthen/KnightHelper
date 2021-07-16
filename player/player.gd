@@ -23,7 +23,6 @@ func _physics_process( delta ):
 	#  flip sprite
 	if not ( dir.x == 0 ):
 		$AnimatedSprite.flip_h = dir.x < 0
-		$CollisionShape2D.scale.x = dir.x
 	
 	#  move
 	move_and_slide( dir.normalized() * speed )
