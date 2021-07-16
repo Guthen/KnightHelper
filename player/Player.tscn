@@ -49,12 +49,47 @@ script = ExtResource( 2 )
 speed = 75
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -8 )
+position = Vector2( 0, -2 )
 frames = SubResource( 7 )
-animation = "walk"
-frame = 3
-playing = true
+animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, -2 )
+position = Vector2( 0.5, 4 )
 shape = SubResource( 8 )
+
+[node name="HUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBackground" type="ColorRect" parent="HUD"]
+margin_left = -8.0
+margin_top = -13.0
+margin_right = 10.0
+margin_bottom = -9.0
+color = Color( 0.129412, 0.129412, 0.137255, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthRectDamage" type="ColorRect" parent="HUD"]
+margin_left = -7.0
+margin_top = -12.0
+margin_right = 9.0
+margin_bottom = -10.0
+color = Color( 0.94902, 0.941176, 0.898039, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthRect" type="ColorRect" parent="HUD"]
+margin_left = -7.0
+margin_top = -12.0
+margin_right = 9.0
+margin_bottom = -10.0
+color = Color( 0.705882, 0.321569, 0.321569, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
