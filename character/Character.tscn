@@ -4,54 +4,54 @@
 [ext_resource path="res://character/player/player.png" type="Texture" id=2]
 [ext_resource path="res://assets/HitShader.shader" type="Shader" id=3]
 
-[sub_resource type="Curve" id=12]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.25165, 0.0, 0, 0 ]
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/IS_ACTIVE = false
 shader_param/REPLACE_COLOR = Color( 1, 1, 1, 1 )
 shader_param/IGNORE_COLOR = Color( 0.129412, 0.129412, 0.137255, 1 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
 region = Rect2( 11, 0, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 15, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
 region = Rect2( 11, 15, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
 region = Rect2( 22, 15, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
 region = Rect2( 33, 15, 11, 15 )
 
-[sub_resource type="SpriteFrames" id=19]
+[sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 5.5, 2 )
 
 [node name="Character" type="KinematicBody2D"]
@@ -70,18 +70,18 @@ initial_velocity = 10.0
 angular_velocity = 200.0
 scale_amount = 1.5
 scale_amount_random = 1.0
-scale_amount_curve = SubResource( 12 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.94902, 0.941176, 0.898039, 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 20 )
+material = SubResource( 2 )
 position = Vector2( 0, -2 )
-frames = SubResource( 19 )
+frames = SubResource( 9 )
 animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 4 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
