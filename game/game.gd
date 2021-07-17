@@ -32,14 +32,15 @@ func _ready():
 func _on_RunButton_pressed():
 	is_running = true
 
-func change_level( level_id ):
+func change_level( level_id ) -> bool:
 	#  delete last level
 	var last_level_node = get_node( "Level" )
 	if last_level_node:
 		last_level_node.queue_free()
 	
 	if not levels[level_id]:
-		return print( "Can't find level %d!" % level_id )
+		print( "Can't find level %d!" % level_id )
+		return false
 	
 	#  instance new level
 	var new_level = levels[level_id].instance()
@@ -47,3 +48,4 @@ func change_level( level_id ):
 	
 	self.level_id = level_id
 	print( "Changed to level %d!" % level_id )
+	return true
