@@ -46,3 +46,6 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 7 )
+
+[node name="HealthRect" parent="HUD" index="2"]
+color = Color( 0.541176, 0.690196, 0.376471, 1 )

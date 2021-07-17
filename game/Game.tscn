@@ -143,6 +143,7 @@ is_looking_left = true
 
 [node name="Slime" parent="WallMap" instance=ExtResource( 9 )]
 position = Vector2( 200, 72 )
+is_looking_left = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
