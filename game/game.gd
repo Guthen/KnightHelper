@@ -13,12 +13,14 @@ func _ready():
 		return print( "Can't read levels!" )
 	
 	#  read levels files
+	print( "Listing levels:" )
 	dir.list_dir_begin()
 	
 	var file = dir.get_next()
 	while not ( file == "" ):
 		if not file.begins_with( "." ): 
 			levels.append( load( levels_path + file ) )
+			print( "%d ─ %s" % [len( levels ) - 1, file] )
 		file = dir.get_next()
 	
 	dir.list_dir_end()
