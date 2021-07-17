@@ -21,7 +21,7 @@ position = Vector2( 152, 72 )
 position = Vector2( 104, 40 )
 
 [node name="BearTrap" parent="WallMap" index="3" instance=ExtResource( 1 )]
-position = Vector2( 128, 56 )
+position = Vector2( 128, 52 )
 
 [node name="Goblin" parent="WallMap" index="4" instance=ExtResource( 5 )]
 position = Vector2( 200, 40 )

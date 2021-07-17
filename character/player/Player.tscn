@@ -1,8 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://character/player/player.gd" type="Script" id=2]
 [ext_resource path="res://character/player/player.png" type="Texture" id=3]
+[ext_resource path="res://assets/HitShader.shader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/IS_ACTIVE = false
+shader_param/REPLACE_COLOR = Color( 1, 1, 1, 1 )
+shader_param/IGNORE_COLOR = Color( 0.129412, 0.129412, 0.137255, 1 )
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -45,7 +53,10 @@ animations = [ {
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="1"]
+material = SubResource( 8 )
 frames = SubResource( 7 )
 
 [node name="HealthRect" parent="HUD" index="2"]
 color = Color( 0.541176, 0.690196, 0.376471, 1 )
+
+[connection signal="on_death" from="." to="." method="_on_Player_on_death"]

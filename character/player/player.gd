@@ -17,3 +17,6 @@ func get_movement_direction() -> Vector2:
 		dir.x += 1
 	
 	return dir
+
+func _on_Player_on_death():
+	get_tree().reload_current_scene()

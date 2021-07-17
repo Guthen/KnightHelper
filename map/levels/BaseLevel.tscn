@@ -109,7 +109,6 @@ tile_data = PoolIntArray( 0, 0, 65538, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0,
 
 [node name="Player" parent="WallMap" instance=ExtResource( 3 )]
 position = Vector2( 56, 56 )
-is_looking_left = true
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 56, 52 )
