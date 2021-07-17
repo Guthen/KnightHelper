@@ -2,28 +2,13 @@ extends Node2D
 
 export var is_running: bool = false
 export var level_id: int = 0
-export var levels_path: String = "res://map/levels/"
 
 var levels = []
+var items = []
+var current_items = {}
 
 func _ready():
-	var dir = Directory.new()
 	
-	if not ( dir.open( levels_path ) == OK ):
-		return print( "Can't read levels!" )
-	
-	#  read levels files
-	print( "Listing levels:" )
-	dir.list_dir_begin()
-	
-	var file = dir.get_next()
-	while not ( file == "" ):
-		if not file.begins_with( "." ): 
-			levels.append( load( levels_path + file ) )
-			print( "%d ─ %s" % [len( levels ) - 1, file] )
-		file = dir.get_next()
-	
-	dir.list_dir_end()
 	
 	#  change level
 	change_level( level_id )
@@ -38,14 +23,25 @@ func change_level( level_id ) -> bool:
 	if last_level_node:
 		last_level_node.queue_free()
 	
-	if not levels[level_id]:
+	if not Utility.levels[level_id]:
 		print( "Can't find level %d!" % level_id )
 		return false
 	
 	#  instance new level
-	var new_level = levels[level_id].instance()
+	var new_level = Utility.levels[level_id].instance()
 	add_child( new_level )
 	
 	self.level_id = level_id
 	print( "Changed to level %d!" % level_id )
+	
+	#  setup items
+	for item in new_level.start_items:
+		current_items[item] = new_level.start_items[item]
+	
+	setup_inventory_ui()
+	
 	return true
+
+func setup_inventory_ui():
+	for item in current_items:
+		pass

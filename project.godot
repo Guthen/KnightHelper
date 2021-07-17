@@ -8,10 +8,24 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Resource",
+"class": "PlaceableItem",
+"language": "GDScript",
+"path": "res://game/items/placeable_item.gd"
+} ]
+_global_script_class_icons={
+"PlaceableItem": ""
+}
+
 [application]
 
 config/name="BoredPixelsJam8"
 run/main_scene="res://game/Game.tscn"
+
+[autoload]
+
+Utility="*res://autorun/Utility.gd"
 
 [display]
 

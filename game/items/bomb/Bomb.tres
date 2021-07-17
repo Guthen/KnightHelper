@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://game/items/placeable_item.gd" type="Script" id=1]
+[ext_resource path="res://game/items/bomb/Bomb.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/bomb.png-addf77e3dc6f94efc7817cd7ffd6c8bc.stex"
+
+[resource]
+script = ExtResource( 1 )
+name = "Bomb"
+description = "Explode breakable walls"
+texture = SubResource( 1 )
+scene = ExtResource( 2 )

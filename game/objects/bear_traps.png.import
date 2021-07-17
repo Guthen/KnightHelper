@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bomb.png-708cce2c0a38fe38e661129766e5f057.stex"
+path="res://.import/bear_traps.png-7c7c08d4f704bfb61fa3dadbdfbb5985.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/objects/bomb.png"
-dest_files=[ "res://.import/bomb.png-708cce2c0a38fe38e661129766e5f057.stex" ]
+source_file="res://game/objects/bear_traps.png"
+dest_files=[ "res://.import/bear_traps.png-7c7c08d4f704bfb61fa3dadbdfbb5985.stex" ]
 
 [params]
 
