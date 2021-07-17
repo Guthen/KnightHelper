@@ -13,7 +13,7 @@
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+points = PoolVector2Array( 16, 16, 0, 16, 0, 4, 16, 4 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -28,7 +28,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 4, 16, 4 )
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+points = PoolVector2Array( 16, 16, 0, 16, 0, 4, 16, 4 )
 
 [sub_resource type="TileSet" id=8]
 0/name = "tileset.png 0"
