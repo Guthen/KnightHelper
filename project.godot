@@ -25,7 +25,7 @@ run/main_scene="res://game/Game.tscn"
 
 [autoload]
 
-Utility="*res://autorun/Utility.gd"
+Utility="*res://autorun/utility.gd"
 
 [display]
 

@@ -22,9 +22,9 @@ func _process( dt ):
 	last_damage_time += dt
 	
 	var ratio = health / max_health
-	$HUD/HealthRect.rect_scale.x = lerp( $HUD/HealthRect.rect_scale.x, ratio, dt * 4 )
+	$HUD/HealthRect.rect_scale.x = max( lerp( $HUD/HealthRect.rect_scale.x, ratio, dt * 4 ), 0 )
 	if last_damage_time > .5:
-		$HUD/HealthRectDamage.rect_scale.x = lerp( $HUD/HealthRectDamage.rect_scale.x, ratio, dt * 5 )
+		$HUD/HealthRectDamage.rect_scale.x = max( lerp( $HUD/HealthRectDamage.rect_scale.x, ratio, dt * 5 ), 0 )
 
 func _physics_process( dt ):
 	var dir = get_movement_direction()
@@ -63,8 +63,9 @@ func take_damage( damage: int, velocity: Vector2 = Vector2.ZERO ):
 	yield( get_tree().create_timer( .25 ), "timeout" )
 	$AnimatedSprite.material.set_shader_param( "IS_ACTIVE", false )
 	
-	if health < 0:
+	if health <= 0:
 		emit_signal( "on_death", damage, velocity )
+		queue_free()
 
 func get_movement_direction() -> Vector2:
 	return Vector2.ZERO

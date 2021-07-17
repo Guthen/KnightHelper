@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://map/levels/BaseLevel.gd" type="Script" id=1]
+[ext_resource path="res://map/levels/base_level.gd" type="Script" id=1]
 [ext_resource path="res://character/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://map/tileset.png" type="Texture" id=6]
 

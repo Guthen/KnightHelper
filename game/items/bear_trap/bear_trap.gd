@@ -3,12 +3,14 @@ extends Node2D
 export var damage: int = 40
 var is_activated = false
 
+onready var game = get_node( "/root/Game" )
+
 func _ready():
 	pass 
 
 
 func _on_Area2D_body_entered( body ):
-	if is_activated:
+	if not game.is_running or is_activated:
 		return
 	
 	if body and body.layers == 2:
@@ -21,4 +23,5 @@ func _on_Area2D_body_entered( body ):
 		#body.take_damage( 40, position.direction_to( body.position ) * 50 )
 		
 		yield( get_tree().create_timer( 1 ), "timeout" )
-		body.is_freezed = false
+		if body:
+			body.is_freezed = false

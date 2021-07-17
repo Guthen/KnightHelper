@@ -1,7 +1,7 @@
 extends Node
 
 var levels = []
-var items = []
+var items = {}
 
 func _ready():
 	#  read levels
@@ -13,7 +13,7 @@ func _ready():
 	#  read items
 	print( "\nListing items:" )
 	for path in list_files( "res://game/items/", ".tres", true ):
-		items.append( load( path ) )
+		items[path.get_file().replace( ".tres", "" )] = load( path )
 		print( "%d ─ '%s'" % [len( items ) - 1, path] )
 	print()
 

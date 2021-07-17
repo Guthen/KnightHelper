@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://game/objects/BearTrap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/items/bear_trap/BearTrap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://character/slime/Slime.tscn" type="PackedScene" id=2]
 [ext_resource path="res://map/levels/BaseLevel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/objects/BreakableWall.tscn" type="PackedScene" id=4]
@@ -8,6 +8,7 @@
 
 [node name="Level" instance=ExtResource( 3 )]
 start_items = {
+"BearTrap": 2,
 "Bomb": 3
 }
 

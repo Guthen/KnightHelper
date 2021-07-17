@@ -12,3 +12,4 @@ name = "Bomb"
 description = "Explode breakable walls"
 texture = SubResource( 1 )
 scene = ExtResource( 2 )
+offset = Vector2( 0, 0 )

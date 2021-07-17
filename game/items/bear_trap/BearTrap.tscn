@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://game/objects/bear_traps.png" type="Texture" id=1]
-[ext_resource path="res://game/objects/bear_trap.gd" type="Script" id=2]
+[ext_resource path="res://game/items/bear_trap/bear_traps.png" type="Texture" id=1]
+[ext_resource path="res://game/items/bear_trap/bear_trap.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )

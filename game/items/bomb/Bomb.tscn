@@ -6,6 +6,7 @@
 extents = Vector2( 3.5, 3.5 )
 
 [node name="Bomb" type="RigidBody2D"]
+gravity_scale = 0.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
