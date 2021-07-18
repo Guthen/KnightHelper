@@ -19,6 +19,7 @@ var player: KinematicBody2D
 var packed_scene: PackedScene
 var last_pos: Vector2
 var last_zoom: Vector2
+var last_click_time: int
 onready var anim_player = $Interface/AnimationPlayer
 
 func _ready():
@@ -194,10 +195,20 @@ func on_button_up( item ):
 
 
 func _on_RunButton_pressed():
+	var cur_time = OS.get_unix_time()
+	if cur_time - last_click_time < 1:
+		return
+		
 	set_running( true )
+	last_click_time = cur_time
 
 func _on_StopButton_pressed():
+	var cur_time = OS.get_unix_time()
+	if cur_time - last_click_time < 1:
+		return
+	
 	set_running( false )
+	last_click_time = cur_time
 
 func _on_AnimationPlayer_animation_finished( anim_name ):
 	if anim_name == "fade_out":
