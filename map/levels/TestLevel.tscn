@@ -8,7 +8,7 @@
 
 [node name="Level" instance=ExtResource( 3 )]
 start_items = {
-"BearTrap": 2,
+"BearTrap": 3,
 "Bomb": 3
 }
 

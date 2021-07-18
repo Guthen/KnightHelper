@@ -12,6 +12,7 @@ onready var start_dust_particles_x = $DustParticles.position.x
 onready var start_dust_particles_dir_y = $DustParticles.direction.y
 
 signal on_death
+signal on_take_damage
 
 func _ready():
 	if is_looking_left:
@@ -56,6 +57,7 @@ func _physics_process( dt ):
 func take_damage( damage: int, velocity: Vector2 = Vector2.ZERO ):
 	health -= damage
 	last_damage_time = 0
+	emit_signal( "on_take_damage", damage, velocity )
 	
 	self.velocity += velocity
 	
@@ -64,8 +66,7 @@ func take_damage( damage: int, velocity: Vector2 = Vector2.ZERO ):
 	$AnimatedSprite.material.set_shader_param( "IS_ACTIVE", false )
 	
 	if health <= 0:
-		emit_signal( "on_death", damage, velocity )
-		queue_free()
+		emit_signal( "on_death" )
 
 func get_movement_direction() -> Vector2:
 	return Vector2.ZERO

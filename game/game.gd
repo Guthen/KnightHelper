@@ -12,11 +12,31 @@ var slots_by_items = {}
 var holding_item
 var holding_item_id
 
+var camera: Camera2D
+var player: KinematicBody2D
+onready var anim_player = $Interface/AnimationPlayer
+
 func _ready():
 	$Interface/InventoryPanel/Slot.visible = false
 	
 	#  change level
 	change_level( level_id )
+	
+	#  play fade
+	anim_player.play( "fade_in" )
+	
+	#  animate camera
+	var last_pos = camera.position
+	var last_zoom = camera.zoom
+	camera.smoothing_enabled = false
+	camera.position = player.position
+	camera.zoom *= .75
+	
+	yield( get_tree().create_timer( 1 ), "timeout" )
+	
+	camera.smoothing_enabled = true
+	camera.position = last_pos
+	camera.desired_zoom = last_zoom
 
 func _process( dt ):
 	if holding_item:
@@ -25,9 +45,9 @@ func _process( dt ):
 func set_running( value: bool ):
 	is_running = value
 	if is_running:
-		$Interface/AnimationPlayer.play( "hide" )
+		anim_player.play( "hide" )
 	else:
-		$Interface/AnimationPlayer.play( "show" )
+		anim_player.play( "show" )
 
 func change_level( level_id ) -> bool:
 	#  delete last level
@@ -42,6 +62,9 @@ func change_level( level_id ) -> bool:
 	#  instance new level
 	var new_level = Utility.levels[level_id].instance()
 	add_child( new_level )
+	
+	camera = new_level.get_node( "Camera" )
+	player = new_level.get_node( "WallMap/Player" )
 	
 	self.level_id = level_id
 	print( "Changed to level %d!" % level_id )
@@ -105,3 +128,8 @@ func _on_RunButton_pressed():
 
 func _on_StopButton_pressed():
 	set_running( false )
+
+func _on_AnimationPlayer_animation_finished( anim_name ):
+	if anim_name == "fade_out":
+		yield( get_tree().create_timer( .5 ), "timeout" )
+		get_tree().reload_current_scene()

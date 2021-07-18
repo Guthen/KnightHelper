@@ -1,6 +1,5 @@
 extends "res://character/character.gd"
 
-
 func _ready():
 	pass
 
@@ -18,5 +17,9 @@ func get_movement_direction() -> Vector2:
 	
 	return dir
 
-func _on_NPC_on_death( damage: int, velocity: Vector2 ):
-	get_tree().reload_current_scene()
+
+func _on_Player_on_take_damage( damage: int, velocity: Vector2 ):
+	if health <= 0:
+		game.camera.position = position
+		game.camera.desired_zoom *= .75
+		game.anim_player.play( "fade_out" )
