@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
-[ext_resource path="res://game/items/placeable_item.gd" type="Script" id=1]
+[ext_resource path="res://game/items/res_placeable_item.gd" type="Script" id=1]
 [ext_resource path="res://game/items/bomb/Bomb.tscn" type="PackedScene" id=2]
 
 [sub_resource type="StreamTexture" id=1]
@@ -12,4 +12,4 @@ name = "Bomb"
 description = "Explode breakable walls"
 texture = SubResource( 1 )
 scene = ExtResource( 2 )
-offset = Vector2( 0, 0 )
+offset = Vector2( 0, -3 )

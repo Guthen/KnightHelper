@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "PlaceableItem",
 "language": "GDScript",
-"path": "res://game/items/placeable_item.gd"
+"path": "res://game/items/res_placeable_item.gd"
 } ]
 _global_script_class_icons={
 "PlaceableItem": ""

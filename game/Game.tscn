@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://game/items/bomb/bomb.png" type="Texture" id=1]
 [ext_resource path="res://assets/stop.png" type="Texture" id=2]
@@ -25,7 +25,7 @@ outline_size = 1
 outline_color = Color( 0.129412, 0.129412, 0.137255, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=7]
 resource_name = "fade_in"
 tracks/0/type = "value"
 tracks/0/path = NodePath("SceneTransition/Control/CircleMask:texture_scale")
@@ -51,8 +51,44 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 270.0, 0.0 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("InventoryPanel:rect_position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 200.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StopControl:rect_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 320.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("RunControl:rect_position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -50.0 ]
+}
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "fade_out"
 tracks/0/type = "value"
 tracks/0/path = NodePath("SceneTransition/Control/CircleMask:texture_scale")
@@ -78,9 +114,71 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0.0, 270.0 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("StopControl:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 320.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RunControl:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -50.0 ]
+}
 
-[sub_resource type="Animation" id=7]
-resource_name = "hide"
+[sub_resource type="Animation" id=9]
+resource_name = "first_show"
+tracks/0/type = "value"
+tracks/0/path = NodePath("RunControl:rect_position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ -50.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("InventoryPanel:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 200.0, 148.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StopControl:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 320.0 ]
+}
+
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("InventoryPanel:rect_position:y")
 tracks/0/interp = 1
@@ -118,8 +216,7 @@ tracks/2/keys = {
 "values": [ 320.0, 276.0 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "show"
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("InventoryPanel:rect_position:y")
 tracks/0/interp = 1
@@ -168,7 +265,8 @@ layer = 0
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -44.0
-margin_bottom = 24.0
+margin_top = -50.0
+margin_bottom = -26.0
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
@@ -241,9 +339,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -12.0
-margin_top = -32.0
+margin_top = 20.0
 margin_right = 12.0
-margin_bottom = -8.0
+margin_bottom = 44.0
 custom_styles/panel = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -299,13 +397,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CircleMask" type="Light2D" parent="Interface/SceneTransition/Control"]
+rotation = 4.71239
 texture = ExtResource( 5 )
-texture_scale = 30.0
+texture_scale = 0.01
 mode = 3
 range_item_cull_mask = 2
 
@@ -320,10 +420,11 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Interface"]
-anims/fade_in = SubResource( 10 )
-anims/fade_out = SubResource( 9 )
-anims/hide = SubResource( 7 )
-anims/show = SubResource( 8 )
+anims/fade_in = SubResource( 7 )
+anims/fade_out = SubResource( 8 )
+anims/first_show = SubResource( 9 )
+anims/hide = SubResource( 10 )
+anims/show = SubResource( 11 )
 
 [connection signal="pressed" from="Interface/RunControl/RunButton" to="." method="_on_RunButton_pressed"]
 [connection signal="pressed" from="Interface/StopControl/StopButton" to="." method="_on_StopButton_pressed"]

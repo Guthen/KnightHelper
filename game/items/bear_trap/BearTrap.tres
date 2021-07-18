@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=5 format=2]
 
-[ext_resource path="res://game/items/placeable_item.gd" type="Script" id=1]
+[ext_resource path="res://game/items/res_placeable_item.gd" type="Script" id=1]
 [ext_resource path="res://game/items/bear_trap/bear_traps.png" type="Texture" id=2]
 [ext_resource path="res://game/items/bear_trap/BearTrap.tscn" type="PackedScene" id=3]
 
@@ -14,4 +14,4 @@ name = "Bear Trap"
 description = "Immobilise anyone who is foolish enough to step on it"
 texture = SubResource( 1 )
 scene = ExtResource( 3 )
-offset = Vector2( 0, -6 )
+offset = Vector2( 0, -5 )

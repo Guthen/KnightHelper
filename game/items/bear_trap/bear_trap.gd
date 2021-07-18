@@ -1,12 +1,10 @@
-extends Node2D
+extends "res://game/items/scn_placeable_item.gd"
 
 export var damage: int = 40
 var is_activated = false
 
-onready var game = get_node( "/root/Game" )
-
 func _ready():
-	pass 
+	is_activated = false 
 
 
 func _on_Area2D_body_entered( body ):
