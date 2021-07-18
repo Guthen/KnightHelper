@@ -28,12 +28,14 @@ func _process( dt ):
 		$HUD/HealthRectDamage.rect_scale.x = max( lerp( $HUD/HealthRectDamage.rect_scale.x, ratio, dt * 5 ), 0 )
 
 func _physics_process( dt ):
-	var dir = get_movement_direction()
+	if health <= 0:
+		return
 	
 	if not ( velocity == Vector2.ZERO ):
 		move_and_slide( velocity )
 		velocity = velocity.move_toward( Vector2.ZERO, dt * 100 )
 	
+	var dir = get_movement_direction()
 	if not game.is_running or is_freezed or dir == Vector2.ZERO:
 		$AnimatedSprite.play( "idle" )
 		$DustParticles.emitting = false
@@ -66,6 +68,7 @@ func take_damage( damage: int, velocity: Vector2 = Vector2.ZERO ):
 	$AnimatedSprite.material.set_shader_param( "IS_ACTIVE", false )
 	
 	if health <= 0:
+		$AnimatedSprite.playing = false
 		emit_signal( "on_death" )
 
 func get_movement_direction() -> Vector2:
