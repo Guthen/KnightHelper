@@ -18,5 +18,5 @@ func get_movement_direction() -> Vector2:
 	
 	return dir
 
-func _on_NPC_on_death():
+func _on_NPC_on_death( damage: int, velocity: Vector2 ):
 	get_tree().reload_current_scene()

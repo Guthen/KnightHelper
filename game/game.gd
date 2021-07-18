@@ -22,9 +22,6 @@ func _process( dt ):
 	if holding_item:
 		holding_item.position = get_global_mouse_position() + Utility.items[holding_item_id].offset
 
-func _on_RunButton_pressed():
-	set_running( not is_running )
-
 func set_running( value: bool ):
 	is_running = value
 	if is_running:
@@ -95,6 +92,16 @@ func on_button_up( item ):
 		return
 	
 	if holding_item:
+		remove_child( holding_item )
+		get_node( "Level/WallMap" ).add_child( holding_item ) 
+		
 		#holding_item.queue_free()
 		holding_item = null
 		holding_item_id = null
+
+
+func _on_RunButton_pressed():
+	set_running( true )
+
+func _on_StopButton_pressed():
+	set_running( false )
