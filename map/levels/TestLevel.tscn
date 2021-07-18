@@ -9,7 +9,8 @@
 [node name="Level" instance=ExtResource( 3 )]
 start_items = {
 "BearTrap": 3,
-"Bomb": 3
+"Bomb": 3,
+"Maul": 1
 }
 
 [node name="FloorMap" parent="." index="0"]

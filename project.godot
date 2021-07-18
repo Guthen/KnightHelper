@@ -9,13 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://character/character.gd"
+}, {
 "base": "Resource",
 "class": "PlaceableItem",
 "language": "GDScript",
 "path": "res://game/items/res_placeable_item.gd"
+}, {
+"base": "Resource",
+"class": "WeaponData",
+"language": "GDScript",
+"path": "res://game/items/weapons/weapon_data.gd"
 } ]
 _global_script_class_icons={
-"PlaceableItem": ""
+"Character": "",
+"PlaceableItem": "",
+"WeaponData": ""
 }
 
 [application]

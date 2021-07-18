@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://game/items/PlaceableItem.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/items/weapons/maul/maul.png" type="Texture" id=2]
+[ext_resource path="res://game/items/weapons/maul/placeable_maul.gd" type="Script" id=3]
+[ext_resource path="res://game/items/weapons/maul/Maul.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 2, 2 )
+
+[node name="PlaceableMaul" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+weapon = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+position = Vector2( 0.33, 0.66 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 2 )
+
+[node name="PickupArea" type="Area2D" parent="." index="1"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="PickupArea" to="." method="_on_PickupArea_body_entered"]

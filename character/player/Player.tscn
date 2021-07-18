@@ -15,7 +15,7 @@ shader_param/IGNORE_COLOR = Color( 0.129412, 0.129412, 0.137255, 1 )
 [node name="Player" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" parent="." index="1"]
+[node name="AnimatedSprite" parent="." index="2"]
 material = SubResource( 1 )
 frames = ExtResource( 1 )
 animation = "walk"

@@ -20,6 +20,7 @@ var packed_scene: PackedScene
 var last_pos: Vector2
 var last_zoom: Vector2
 var last_click_time: int
+var is_paused: bool setget set_pause
 onready var anim_player = $Interface/AnimationPlayer
 
 func _ready():
@@ -70,6 +71,12 @@ func set_running( value: bool, animate: bool = false ):
 		anim_player.play( "show" )
 	
 	is_running = value
+
+func set_pause( value: bool ):
+	for node in level.get_node( "WallMap" ).get_children():
+		node.set_physics_process( not value ) 
+	
+	is_paused = value
 
 func unpack_level( packed_scene, animate: bool = false ) -> Node:	
 	var new_level = packed_scene.instance()

@@ -17,9 +17,14 @@ func get_movement_direction() -> Vector2:
 	
 	return dir
 
+func _input( event ):
+	if event is InputEventMouseButton:
+		if game.is_running and event.pressed and event.button_index == BUTTON_LEFT:
+			attack_at( get_global_mouse_position() )
 
 func _on_Player_on_take_damage( damage: int, velocity: Vector2 ):
 	if health <= 0:
-		game.camera.position = position
+		game.set_pause( true )
+		game.camera.target = self
 		game.camera.desired_zoom *= .75
 		game.anim_player.play( "fade_out" )
