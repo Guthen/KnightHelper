@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://map/levels/base_level.gd" type="Script" id=1]
 [ext_resource path="res://map/levels/camera.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://character/goblin/Goblin.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/weapons/Maul.tres" type="Resource" id=5]
 [ext_resource path="res://map/tileset.png" type="Texture" id=6]
+[ext_resource path="res://map/Door.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -115,6 +116,9 @@ cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 cell_y_sort = true
 format = 1
 tile_data = PoolIntArray( 0, 0, 65538, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 65540, 65536, 0, 65538, 65542, 0, 65540, 196607, 0, 65538, 131072, 0, 0, 131078, 0, 65540, 262143, 0, 65538, 196614, 0, 65540, 327679, 0, 131074, 262144, 0, 2, 262150, 0, 65540, 327680, 0, 65538, 327686, 0, 65540, 393216, 0, 131074, 393217, 0, 131075, 393218, 0, 131075, 393219, 0, 131075, 393220, 0, 131075, 393221, 0, 131075, 393222, 0, 131076 )
+
+[node name="Door" parent="WallMap" instance=ExtResource( 7 )]
+position = Vector2( 88, 56 )
 
 [node name="Player" parent="WallMap" instance=ExtResource( 3 )]
 position = Vector2( 56, 52 )
