@@ -24,9 +24,12 @@ func attack( ang: float ):
 	set_attacking( true )
 	
 	$Pivot.rotation = ang - PI
-	anim_player.play( weapon_data.type + "_" + str( fmod( attack_count, 2 ) + 1 ) )
+	if weapon_data.type == "stab":
+		anim_player.play( "stab" )
+	else:
+		anim_player.play( weapon_data.type + "_" + str( fmod( attack_count, 2 ) + 1 ) )
+		$Pivot/Pos.rotation = PI if fmod( attack_count, 2 ) == 1 else 0
 	
-	$Pivot/Pos.rotation = PI if fmod( attack_count, 2 ) == 1 else 0
 	#weapon.flip_image( )
 	
 	

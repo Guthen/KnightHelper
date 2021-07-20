@@ -9,7 +9,7 @@ func set_image( image: Texture ):
 	$Weapon/Sprite.texture = image
 
 func toggle_hitbox( value: bool ):
-	$Weapon/HitArea/CollisionShape2D.disabled = not value
+	$Weapon/HitArea/CollisionShape2D.set_deferred( "disabled", not value )
 
 func flip_image( value: bool ):
 	$Weapon/Sprite.flip_v = value

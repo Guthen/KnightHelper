@@ -13,6 +13,9 @@ var slots_by_items = {}
 var holding_item
 var is_moving_item = false
 
+var callback_object: Node
+var callback_method: String
+
 var time: float
 var camera: Camera2D
 var player: KinematicBody2D
@@ -25,9 +28,6 @@ onready var anim_player = $Interface/AnimationPlayer
 
 func _ready():
 	$Interface/InventoryPanel/Slot.visible = false
-	
-	#  play fade
-	anim_player.play( "fade_in" )
 	
 	#  change level
 	change_level( level_id )
@@ -64,9 +64,12 @@ func set_running( value: bool, animate: bool = false ):
 		
 		anim_player.play( "hide" )
 	else:
-		get_node( "Level" ).free()
-		unpack_level( packed_scene, animate )
-		packed_scene = null
+		var level = get_node( "Level" )
+		if level:
+			level.free()
+		if packed_scene:
+			unpack_level( packed_scene, animate )
+			packed_scene = null
 		
 		anim_player.play( "show" )
 	
@@ -78,9 +81,9 @@ func set_pause( value: bool ):
 	
 	is_paused = value
 
-func unpack_level( packed_scene, animate: bool = false ) -> Node:	
+func unpack_level( packed_scene, animate: bool = false ) -> Node:
 	var new_level = packed_scene.instance()
-	add_child( new_level )
+	call_deferred( "add_child", new_level )
 	
 	level = new_level
 	camera = new_level.get_node( "Camera" )
@@ -100,11 +103,16 @@ func change_level( level_id ) -> bool:
 	#  delete last level
 	var last_level_node = get_node( "Level" )
 	if last_level_node:
-		last_level_node.queue_free()
+		last_level_node.call_deferred( "free" )
 	
-	if not Utility.levels[level_id]:
+	if level_id < 0 or level_id > len( Utility.levels ) - 1:
 		print( "Can't find level %d!" % level_id )
 		return false
+	
+	#  play fade
+	anim_player.play( "fade_in" )
+	is_paused = false
+	is_running = false
 	
 	#  instance new level
 	var new_level = unpack_level( Utility.levels[level_id], true )
@@ -119,6 +127,16 @@ func change_level( level_id ) -> bool:
 	setup_inventory_ui()
 	
 	return true
+
+func fade_out( target: Node2D, object: Node = null, method: String = "" ):
+	set_pause( true )
+	camera.target = target
+	camera.desired_zoom *= .75
+	
+	callback_object = object
+	callback_method = method
+	
+	anim_player.play( "fade_out" )
 
 func setup_inventory_ui():
 	var i = $Interface/InventoryPanel.get_child_count() - 1
@@ -219,9 +237,12 @@ func _on_StopButton_pressed():
 
 func _on_AnimationPlayer_animation_finished( anim_name ):
 	if anim_name == "fade_out":
-		yield( get_tree().create_timer( .5 ), "timeout" )
-		set_running( false, true )
-		anim_player.play( "fade_in" )
+		if callback_object:
+			callback_object.call( callback_method )
+		else:
+			yield( get_tree().create_timer( .5 ), "timeout" )
+			set_running( false, true )
+			anim_player.play( "fade_in" )
 	elif anim_name == "fade_in" && not camera.smoothing_enabled:
 		camera.smoothing_enabled = true
 		camera.position = last_pos

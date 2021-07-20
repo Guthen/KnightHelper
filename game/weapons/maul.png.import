@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/maul.png-d148db4d2dd2851a292dafcbfcf8bee7.stex"
+path="res://.import/maul.png-67f39216682928a006f7407c287b7c6d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/items/weapons/maul/maul.png"
-dest_files=[ "res://.import/maul.png-d148db4d2dd2851a292dafcbfcf8bee7.stex" ]
+source_file="res://game/weapons/maul.png"
+dest_files=[ "res://.import/maul.png-67f39216682928a006f7407c287b7c6d.stex" ]
 
 [params]
 

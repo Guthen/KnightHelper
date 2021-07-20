@@ -1,13 +1,13 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://game/items/weapons/weapon_data.gd" type="Script" id=1]
-[ext_resource path="res://game/weapons/maul.png" type="Texture" id=2]
+[ext_resource path="res://game/weapons/dagger.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
-damage = 20
-type = "swing"
+damage = 5
+type = "stab"
 image = ExtResource( 2 )
-attack_time = 0.5
-recover_time = 0.2
-knockback_force = 50
+attack_time = 0.2
+recover_time = 0.1
+knockback_force = 20

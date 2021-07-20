@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://game/items/PlaceableItem.tscn" type="PackedScene" id=1]
-[ext_resource path="res://game/items/weapons/maul/maul.png" type="Texture" id=2]
+[ext_resource path="res://game/weapons/maul.png" type="Texture" id=2]
 [ext_resource path="res://game/items/weapons/maul/placeable_maul.gd" type="Script" id=3]
 [ext_resource path="res://game/items/weapons/maul/Maul.tscn" type="PackedScene" id=4]
 

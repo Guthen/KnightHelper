@@ -19,7 +19,7 @@ tile_data = PoolIntArray( 65537, 0, 65536, 65538, 0, 65537, 65539, 0, 131072, 65
 tile_data = PoolIntArray( 0, 0, 65538, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 65540, 9, 0, 65538, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 65540, 65536, 0, 65538, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65551, 0, 65540, 196607, 0, 65538, 131072, 0, 0, 131087, 0, 65540, 262143, 0, 65538, 196623, 0, 65540, 327679, 0, 131074, 262144, 0, 2, 262159, 0, 65540, 327680, 0, 65538, 327686, 0, 4, 327687, 0, 131075, 327688, 0, 131075, 327689, 0, 2, 327695, 0, 65540, 393216, 0, 131074, 393217, 0, 131075, 393218, 0, 131075, 393219, 0, 131075, 393220, 0, 131075, 393221, 0, 131075, 393222, 0, 131076, 393225, 0, 131074, 393226, 0, 131075, 393227, 0, 131075, 393228, 0, 131075, 393229, 0, 131075, 393230, 0, 131075, 393231, 0, 131076 )
 
 [node name="Door" parent="WallMap" index="0"]
-position = Vector2( 232, 56 )
+position = Vector2( 200, 8 )
 
 [node name="BreakableWall" parent="WallMap" index="1" instance=ExtResource( 4 )]
 position = Vector2( 152, 72 )
@@ -30,6 +30,9 @@ position = Vector2( 104, 40 )
 [node name="BearTrap" parent="WallMap" index="3" instance=ExtResource( 1 )]
 position = Vector2( 120, 51 )
 is_placeable = false
+
+[node name="Player" parent="WallMap" index="4"]
+weapon_data = null
 
 [node name="Slime" parent="WallMap" index="5" instance=ExtResource( 2 )]
 position = Vector2( 200, 68 )
