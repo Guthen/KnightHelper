@@ -3,7 +3,13 @@ extends Node
 var levels = []
 var items = {}
 
+var font = DynamicFont.new() 
+
 func _ready():
+	#  font
+	font.font_data = load( "res://assets/vkx_pixel.ttf" )
+	font.size = 12
+	
 	#  read levels
 	print( "Listing levels:" )
 	for path in list_files( "res://map/levels/", ".tscn" ):

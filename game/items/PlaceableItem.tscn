@@ -7,7 +7,7 @@
 extents = Vector2( 7, 7 )
 
 [node name="PlaceableItem" type="Node2D" groups=[
-"placeable",
+"placeables",
 ]]
 script = ExtResource( 2 )
 

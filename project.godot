@@ -38,6 +38,7 @@ run/main_scene="res://game/Game.tscn"
 [autoload]
 
 Utility="*res://autorun/utility.gd"
+Pathfinder="*res://autorun/pathfinder.gd"
 
 [display]
 

@@ -98,7 +98,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 4, 16, 4 )
 z_index = -1
 script = ExtResource( 1 )
 start_items = {
-"BearTrap": 3
+"BearTrap": 1
 }
 
 [node name="FloorMap" type="TileMap" parent="."]
@@ -120,10 +120,10 @@ tile_data = PoolIntArray( 0, 0, 65538, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0,
 position = Vector2( 56, 8 )
 
 [node name="Player" parent="WallMap" instance=ExtResource( 3 )]
-position = Vector2( 56, 68 )
+position = Vector2( 56, 84 )
 
 [node name="Goblin2" parent="WallMap" instance=ExtResource( 4 )]
-position = Vector2( 56, 36 )
+position = Vector2( 56, 20 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 56, 52 )

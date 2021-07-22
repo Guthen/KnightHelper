@@ -1,6 +1,7 @@
 extends Node2D
 
-onready var weapon = $Pivot/Pos/WeaponEntity
+onready var weapon_origin = $Pivot/Pos
+onready var weapon = weapon_origin.get_node( "Weapon" )
 onready var anim_player = $AnimationPlayer
 
 var weapon_data: Resource
@@ -11,6 +12,11 @@ var has_recovered: bool = true
 
 func _ready():
 	set_attacking( false )
+	set_weapon_node( weapon )
+
+func set_weapon_node( weapon: Area2D ):
+	self.weapon = weapon
+	weapon.character_owner = get_parent()
 
 func set_attacking( value: bool ):
 	is_attacking = value
@@ -18,16 +24,19 @@ func set_attacking( value: bool ):
 
 func set_pivot_rotation( ang: float ):
 	$Pivot.rotation = ang - PI
+	z_index = 1 if ang < 0 else 0
 
 func attack( ang: float ):
 	if not weapon_data or not has_recovered:
 		return
 	
+	weapon.prepare()
 	has_recovered = false
 	set_attacking( true )
 	
 	set_pivot_rotation( ang )
 	if weapon_data.type == "stab":
+		anim_player.stop()
 		anim_player.play( "stab" )
 	else:
 		anim_player.play( weapon_data.type + "_" + str( fmod( attack_count, 2 ) + 1 ) )
@@ -47,7 +56,12 @@ func attack( ang: float ):
 	has_recovered = true
 
 func set_weapon( data: Resource ):
-	weapon.set_image( data.image )
+	weapon.free()
+	weapon = data.weapon.instance()
+	weapon_origin.add_child( weapon )
+	set_weapon_node( weapon )
+	
+	#weapon.set_image( data.image )
 	weapon.weapon_data = data
 	weapon.visible = true
 	set_attacking( false )

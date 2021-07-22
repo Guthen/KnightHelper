@@ -46,7 +46,7 @@ func _input( event ):
 	if event is InputEventMouseButton:
 		if not is_running and event.button_index == BUTTON_LEFT:
 			if not holding_item and event.pressed:
-				for placeable in get_tree().get_nodes_in_group( "placeable" ):
+				for placeable in get_tree().get_nodes_in_group( "placeables" ):
 					if placeable.is_placeable and placeable.is_hovered:
 						hold_item( placeable )
 						is_moving_item = true
@@ -90,6 +90,7 @@ func unpack_level( packed_scene, animate: bool = false ) -> Node:
 	camera = new_level.get_node( "Camera" )
 	player = new_level.get_node( "WallMap/Player" )
 	door = new_level.get_node( "WallMap/Door" )
+	Pathfinder.call_deferred( "init", level.get_node( "FloorMap" ) )
 	
 	#  animate camera
 	if animate:
@@ -123,8 +124,10 @@ func change_level( level_id ) -> bool:
 	print( "Changed to level %d!" % level_id )
 	
 	#  setup items
+	current_items = {}
 	for item in new_level.start_items:
-		current_items[item] = new_level.start_items[item]
+		if new_level.start_items[item] > 0:
+			current_items[item] = new_level.start_items[item]
 	
 	setup_inventory_ui()
 	
@@ -184,12 +187,12 @@ func is_item_placeable( item: Node2D ):
 			continue
 		
 		if node is PhysicsBody2D and item.get_node( "MouseCollision" ).overlaps_body( node ):
-			return false
+			return item.can_place_on( node )
 		
 		if "is_placeable" in node and item.get_node( "MouseCollision" ).overlaps_area( node.get_node( "MouseCollision" ) ):
 			return false 
 	
-	return true
+	return item.can_place_on_floor
 
 func hold_item( item ):
 	item.z_index = 1
@@ -197,7 +200,8 @@ func hold_item( item ):
 
 func drop_holding_item():
 	holding_item.get_node( "HaloSprite" ).self_modulate = Color.white
-	holding_item.z_index = 0
+	if holding_item.reset_z_index:
+		holding_item.z_index = 0
 	
 	if not is_item_placeable( holding_item ):
 		delete_item( holding_item )
@@ -245,8 +249,10 @@ func _on_StopButton_pressed():
 
 func _on_AnimationPlayer_animation_finished( anim_name ):
 	if anim_name == "fade_out":
-		if callback_object:
+		if callback_object and callback_method:
 			callback_object.call( callback_method )
+			callback_object = null
+			callback_method = ""
 		else:
 			yield( get_tree().create_timer( .5 ), "timeout" )
 			set_running( false, true )

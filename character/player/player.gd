@@ -1,7 +1,7 @@
 extends "res://character/character.gd"
 
 func _ready():
-	stop_target_dist_sqr = 2
+	pass
 
 #func get_movement_direction() -> Vector2:
 #	var dir = Vector2()
@@ -21,19 +21,57 @@ func _process( dt ):
 	if not game.is_running:
 		return
 	
-	var res = get_nearest_item()
-	if game.door.position.distance_squared_to( position ) < res[1]:
-		target = game.door
+	if not is_idle:
 		return
 	
-	target = res[0]
+	var item_res = get_nearest_item()
+	
+	#  attack nearest enemy
+	if weapon_data:
+		var enemy_res = get_nearest_enemy()
+		if enemy_res[1] < item_res[1]:
+			target = enemy_res[0]
+			stop_target_dist_sqr = default_stop_target_dist_sqr
+			find_path( target.position )
+			return
+	
+	#  go to door
+	stop_target_dist_sqr = 0
+	if game.door.position.distance_squared_to( position ) < item_res[1]:
+		target = game.door
+		find_path( target.position )
+		path.remove( len( path ) - 1 )
+		return
+	
+	#  go to the item
+	target = item_res[0]
+	find_path( target.position )
+
+func on_stop_target():
+	if is_freezed:
+		return
+	
+	if target is Character:
+		attack_at( target.global_position )
+
+func get_nearest_enemy():
+	var nearest_dist = INF
+	var nearest_enemy = null
+	 
+	for enemy in get_tree().get_nodes_in_group( "enemies" ):
+		var dist = enemy.position.distance_squared_to( position )
+		if dist < nearest_dist:
+			nearest_dist = dist
+			nearest_enemy = enemy
+	
+	return [nearest_enemy, nearest_dist]
 
 func get_nearest_item():
 	var nearest_dist = INF
 	var nearest_item = null
 	 
-	for item in get_tree().get_nodes_in_group( "placeable" ):
-		if not item.is_friendly:
+	for item in get_tree().get_nodes_in_group( "placeables" ):
+		if not item.is_pickable:
 			continue
 		
 		if "is_activated" in item and item.is_activated:
@@ -51,7 +89,7 @@ func _input( event ):
 		if game.is_running and event.pressed and event.button_index == BUTTON_LEFT:
 			attack_at( get_global_mouse_position() )
 
-func _on_Player_on_take_damage( damage: int, velocity: Vector2 ):
+func on_take_damage( damage: int, velocity: Vector2 ):
 	if health <= 0:
 		game.set_pause( true )
 		game.camera.target = self

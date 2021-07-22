@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://game/items/weapons/weapon_data.gd" type="Script" id=1]
-[ext_resource path="res://game/weapons/maul.png" type="Texture" id=2]
+[ext_resource path="res://game/weapons/maul/maul.png" type="Texture" id=2]
 [ext_resource path="res://game/weapons/maul/Maul.tscn" type="PackedScene" id=3]
 
 [resource]

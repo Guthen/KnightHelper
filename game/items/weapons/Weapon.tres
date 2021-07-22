@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://game/weapons/maul/maul.png" type="Texture" id=1]
+[ext_resource path="res://game/items/weapons/PlaceableWeapon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/items/res_placeable_item.gd" type="Script" id=3]
+
+[resource]
+script = ExtResource( 3 )
+name = "Weapon"
+description = "Give a weapon to the hero!"
+texture = ExtResource( 1 )
+scene = ExtResource( 2 )
+offset = Vector2( 0, 0 )

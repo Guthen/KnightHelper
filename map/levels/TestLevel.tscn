@@ -7,9 +7,9 @@
 
 [node name="Level" instance=ExtResource( 3 )]
 start_items = {
-"BearTrap": 3,
-"Bomb": 3,
-"Maul": 1
+"BearTrap": 0,
+"Bomb": 1,
+"Weapon": 0
 }
 
 [node name="FloorMap" parent="." index="0"]
@@ -22,16 +22,21 @@ tile_data = PoolIntArray( 0, 0, 65538, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0,
 position = Vector2( 200, 8 )
 
 [node name="BreakableWall" parent="WallMap" index="1" instance=ExtResource( 4 )]
-position = Vector2( 152, 72 )
+position = Vector2( 104, 72 )
 
-[node name="BreakableWall2" parent="WallMap" index="2" instance=ExtResource( 4 )]
+[node name="BreakableWall3" parent="WallMap" index="2" instance=ExtResource( 4 )]
+position = Vector2( 104, 56 )
+
+[node name="BreakableWall2" parent="WallMap" index="3" instance=ExtResource( 4 )]
 position = Vector2( 104, 40 )
 
-[node name="BearTrap" parent="WallMap" index="3" instance=ExtResource( 1 )]
+[node name="BearTrap" parent="WallMap" index="4" groups=[
+"placeable",
+] instance=ExtResource( 1 )]
 position = Vector2( 120, 51 )
 is_placeable = false
 
-[node name="Slime" parent="WallMap" index="5" instance=ExtResource( 2 )]
+[node name="Slime" parent="WallMap" index="6" instance=ExtResource( 2 )]
 position = Vector2( 200, 68 )
 is_looking_left = true
 

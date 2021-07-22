@@ -6,34 +6,33 @@
 [ext_resource path="res://character/weapon_controller.gd" type="Script" id=4]
 [ext_resource path="res://game/items/weapons/Weapon.tscn" type="PackedScene" id=5]
 
-[sub_resource type="Animation" id=1]
-resource_name = "stab"
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot:position:x")
+tracks/0/path = NodePath("Pivot/Pos:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 0.189465, 0.183011, 1 ),
-"update": 0,
-"values": [ 0.0, 5.0, 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Pivot/Pos:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 90.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Pos:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 0.153893, 0.287175, 1 ),
+"update": 0,
+"values": [ 0.0, 3.0, 0.0 ]
+}
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=12]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
@@ -47,7 +46,7 @@ tracks/0/keys = {
 "values": [ -15.0, 165.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Pivot/Pos/WeaponEntity:rotation_degrees")
+tracks/1/path = NodePath("Pivot/Pos/Weapon:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -59,7 +58,7 @@ tracks/1/keys = {
 "values": [ 0.0, 50.0 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=13]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
@@ -73,7 +72,7 @@ tracks/0/keys = {
 "values": [ 165.0, -15.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Pivot/Pos/WeaponEntity:rotation_degrees")
+tracks/1/path = NodePath("Pivot/Pos/Weapon:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -85,54 +84,54 @@ tracks/1/keys = {
 "values": [ 0.0, -50.0 ]
 }
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.25165, 0.0, 0, 0 ]
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/IS_ACTIVE = false
 shader_param/REPLACE_COLOR = Color( 1, 1, 1, 1 )
 shader_param/IGNORE_COLOR = Color( 0.129412, 0.129412, 0.137255, 1 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
 region = Rect2( 11, 0, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 15, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
 region = Rect2( 11, 15, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
 region = Rect2( 22, 15, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
 region = Rect2( 33, 15, 11, 15 )
 
-[sub_resource type="SpriteFrames" id=12]
+[sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 5.5, 2 )
 
 [node name="Character" type="KinematicBody2D"]
@@ -143,16 +142,17 @@ script = ExtResource( 1 )
 script = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WeaponController"]
-anims/stab = SubResource( 1 )
-anims/swing_1 = SubResource( 2 )
-anims/swing_2 = SubResource( 3 )
+anims/stab = SubResource( 11 )
+anims/swing_1 = SubResource( 12 )
+anims/swing_2 = SubResource( 13 )
 
 [node name="Pivot" type="Node2D" parent="WeaponController"]
 
 [node name="Pos" type="Node2D" parent="WeaponController/Pivot"]
+position = Vector2( 3, 0 )
 rotation = 1.5708
 
-[node name="WeaponEntity" parent="WeaponController/Pivot/Pos" instance=ExtResource( 5 )]
+[node name="Weapon" parent="WeaponController/Pivot/Pos" instance=ExtResource( 5 )]
 visible = false
 
 [node name="DustParticles" type="CPUParticles2D" parent="."]
@@ -168,18 +168,18 @@ initial_velocity = 10.0
 angular_velocity = 200.0
 scale_amount = 1.5
 scale_amount_random = 1.0
-scale_amount_curve = SubResource( 4 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.94902, 0.941176, 0.898039, 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 5 )
+material = SubResource( 2 )
 position = Vector2( 0, -2 )
-frames = SubResource( 12 )
+frames = SubResource( 9 )
 animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 4 )
-shape = SubResource( 13 )
+shape = SubResource( 10 )
 
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
@@ -194,6 +194,7 @@ margin_left = -8.0
 margin_top = -13.0
 margin_right = 10.0
 margin_bottom = -9.0
+mouse_filter = 2
 color = Color( 0.129412, 0.129412, 0.137255, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -204,6 +205,7 @@ margin_left = -7.0
 margin_top = -12.0
 margin_right = 9.0
 margin_bottom = -10.0
+mouse_filter = 2
 color = Color( 0.94902, 0.941176, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -214,9 +216,10 @@ margin_left = -7.0
 margin_top = -12.0
 margin_right = 9.0
 margin_bottom = -10.0
+mouse_filter = 2
 color = Color( 0.705882, 0.321569, 0.321569, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[editable path="WeaponController/Pivot/Pos/WeaponEntity"]
+[editable path="WeaponController/Pivot/Pos/Weapon"]
