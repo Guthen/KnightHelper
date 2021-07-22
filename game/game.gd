@@ -141,6 +141,12 @@ func fade_out( target: Node2D, object: Node = null, method: String = "" ):
 	anim_player.play( "fade_out" )
 
 func setup_inventory_ui():
+	#  clear
+	for child in $Interface/InventoryPanel.get_children():
+		if not ( child == $Interface/InventoryPanel/Slot ):
+			child.free()
+	
+	#  compute
 	var i = $Interface/InventoryPanel.get_child_count() - 1
 	for item in current_items:
 		var slot = $Interface/InventoryPanel/Slot.duplicate()
