@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://map/levels/base_level.gd" type="Script" id=1]
 [ext_resource path="res://map/levels/camera.gd" type="Script" id=2]
 [ext_resource path="res://character/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://character/goblin/Goblin.tscn" type="PackedScene" id=4]
-[ext_resource path="res://game/weapons/Dagger.tres" type="Resource" id=5]
 [ext_resource path="res://map/tileset.png" type="Texture" id=6]
 [ext_resource path="res://map/Door.tscn" type="PackedScene" id=7]
 
@@ -121,14 +120,10 @@ tile_data = PoolIntArray( 0, 0, 65538, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0,
 position = Vector2( 56, 8 )
 
 [node name="Player" parent="WallMap" instance=ExtResource( 3 )]
-position = Vector2( 56, 52 )
-weapon_data = ExtResource( 5 )
-
-[node name="Goblin" parent="WallMap" instance=ExtResource( 4 )]
-position = Vector2( 40, 36 )
+position = Vector2( 56, 68 )
 
 [node name="Goblin2" parent="WallMap" instance=ExtResource( 4 )]
-position = Vector2( 72, 36 )
+position = Vector2( 56, 36 )
 is_looking_left = true
 
 [node name="Camera" type="Camera2D" parent="."]

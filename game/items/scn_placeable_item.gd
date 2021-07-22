@@ -1,6 +1,7 @@
 extends Node2D
 
 export var is_placeable: bool = true
+export var is_friendly: bool = false
 export var hovered_color: Color = Color8( 255, 255, 255, 225 )
 export var item_id: String
 

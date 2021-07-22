@@ -9,6 +9,9 @@ func _on_Area2D_body_entered( body ):
 	if not game.is_running:
 		return
 	
+	if not ( body == game.player ):
+		return
+	
 	game.fade_out( self, self, "on_fade_out" )
 
 func on_fade_out():

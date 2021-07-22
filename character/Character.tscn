@@ -146,6 +146,7 @@ rotation = -0.872665
 
 [node name="DustParticles" type="CPUParticles2D" parent="."]
 position = Vector2( -4, 5 )
+emitting = false
 amount = 5
 lifetime_randomness = 0.3
 local_coords = false

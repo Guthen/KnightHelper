@@ -19,6 +19,7 @@ var callback_method: String
 var time: float
 var camera: Camera2D
 var player: KinematicBody2D
+var door: Node2D
 var packed_scene: PackedScene
 var last_pos: Vector2
 var last_zoom: Vector2
@@ -88,6 +89,7 @@ func unpack_level( packed_scene, animate: bool = false ) -> Node:
 	level = new_level
 	camera = new_level.get_node( "Camera" )
 	player = new_level.get_node( "WallMap/Player" )
+	door = new_level.get_node( "WallMap/Door" )
 	
 	#  animate camera
 	if animate:

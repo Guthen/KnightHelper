@@ -1,12 +1,12 @@
 extends "res://game/items/scn_placeable_item.gd"
 
-export var weapon: PackedScene
+export var weapon_data: Resource
 
 func _ready():
 	pass
 
 
 func _on_PickupArea_body_entered( body ):
-	if weapon:
-		body.hold_weapon( weapon.instance() )
+	if weapon_data:
+		body.set_weapon( weapon_data )
 		queue_free()

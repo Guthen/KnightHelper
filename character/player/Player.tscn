@@ -24,3 +24,5 @@ animation = "walk"
 color = Color( 0.541176, 0.690196, 0.376471, 1 )
 
 [connection signal="on_take_damage" from="." to="." method="_on_Player_on_take_damage"]
+
+[editable path="WeaponController/Pivot/Pos/WeaponEntity"]

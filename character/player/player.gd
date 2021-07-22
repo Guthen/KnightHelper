@@ -1,21 +1,50 @@
 extends "res://character/character.gd"
 
 func _ready():
-	pass
+	stop_target_dist_sqr = 2
 
-func get_movement_direction() -> Vector2:
-	var dir = Vector2()
+#func get_movement_direction() -> Vector2:
+#	var dir = Vector2()
+#
+##	if Input.is_action_pressed( "up" ):
+##		dir.y -= 1
+##	if Input.is_action_pressed( "down" ):
+##		dir.y += 1
+##	if Input.is_action_pressed( "left" ):
+##		dir.x -= 1 
+##	if Input.is_action_pressed( "right" ):
+##		dir.x += 1
+#
+#	return dir
+
+func _process( dt ):
+	if not game.is_running:
+		return
 	
-	if Input.is_action_pressed( "up" ):
-		dir.y -= 1
-	if Input.is_action_pressed( "down" ):
-		dir.y += 1
-	if Input.is_action_pressed( "left" ):
-		dir.x -= 1 
-	if Input.is_action_pressed( "right" ):
-		dir.x += 1
+	var res = get_nearest_item()
+	if game.door.position.distance_squared_to( position ) < res[1]:
+		target = game.door
+		return
 	
-	return dir
+	target = res[0]
+
+func get_nearest_item():
+	var nearest_dist = INF
+	var nearest_item = null
+	 
+	for item in get_tree().get_nodes_in_group( "placeable" ):
+		if not item.is_friendly:
+			continue
+		
+		if "is_activated" in item and item.is_activated:
+			continue
+		
+		var dist = item.position.distance_squared_to( position )
+		if dist < nearest_dist:
+			nearest_dist = dist
+			nearest_item = item
+	
+	return [nearest_item, nearest_dist]
 
 func _input( event ):
 	if event is InputEventMouseButton:

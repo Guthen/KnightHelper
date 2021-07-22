@@ -16,6 +16,9 @@ onready var start_dust_particles_dir_y = $DustParticles.direction.y
 
 var holding_weapon: Node2D
 var last_damage_time: float = 0
+var target: Node2D
+var default_stop_target_dist_sqr: int = 64 ^ 2
+var stop_target_dist_sqr: int = default_stop_target_dist_sqr
 
 signal on_death
 signal on_take_damage
@@ -92,4 +95,10 @@ func set_weapon( weapon: Resource ):
 	$WeaponController.set_weapon( weapon )
 
 func get_movement_direction() -> Vector2:
+	if target and weakref( target ).get_ref():
+		if target.position.distance_squared_to( position ) <= stop_target_dist_sqr:
+			return Vector2.ZERO
+		
+		return position.direction_to( target.position )
+	
 	return Vector2.ZERO
