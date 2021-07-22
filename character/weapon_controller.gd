@@ -16,6 +16,9 @@ func set_attacking( value: bool ):
 	is_attacking = value
 	weapon.toggle_hitbox( value )
 
+func set_pivot_rotation( ang: float ):
+	$Pivot.rotation = ang - PI
+
 func attack( ang: float ):
 	if not weapon_data or not has_recovered:
 		return
@@ -23,7 +26,7 @@ func attack( ang: float ):
 	has_recovered = false
 	set_attacking( true )
 	
-	$Pivot.rotation = ang - PI
+	set_pivot_rotation( ang )
 	if weapon_data.type == "stab":
 		anim_player.play( "stab" )
 	else:

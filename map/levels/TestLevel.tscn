@@ -31,15 +31,8 @@ position = Vector2( 104, 40 )
 position = Vector2( 120, 51 )
 is_placeable = false
 
-[node name="Player" parent="WallMap" index="4"]
-weapon_data = null
-
 [node name="Slime" parent="WallMap" index="5" instance=ExtResource( 2 )]
 position = Vector2( 200, 68 )
-is_looking_left = true
-
-[node name="Goblin" parent="WallMap" index="6"]
-position = Vector2( 200, 36 )
 is_looking_left = true
 
 [node name="Camera" parent="." index="2"]

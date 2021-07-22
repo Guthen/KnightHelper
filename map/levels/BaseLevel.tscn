@@ -124,7 +124,6 @@ position = Vector2( 56, 68 )
 
 [node name="Goblin2" parent="WallMap" instance=ExtResource( 4 )]
 position = Vector2( 56, 36 )
-is_looking_left = true
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 56, 52 )

@@ -16,9 +16,21 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 0.5, 0.5, 1 ),
+"transitions": PoolRealArray( 0.189465, 0.183011, 1 ),
 "update": 0,
 "values": [ 0.0, 5.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Pos:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -138,11 +150,10 @@ anims/swing_2 = SubResource( 3 )
 [node name="Pivot" type="Node2D" parent="WeaponController"]
 
 [node name="Pos" type="Node2D" parent="WeaponController/Pivot"]
-position = Vector2( 9.91808, -1.62227 )
+rotation = 1.5708
 
 [node name="WeaponEntity" parent="WeaponController/Pivot/Pos" instance=ExtResource( 5 )]
 visible = false
-rotation = -0.872665
 
 [node name="DustParticles" type="CPUParticles2D" parent="."]
 position = Vector2( -4, 5 )

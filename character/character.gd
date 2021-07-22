@@ -33,6 +33,11 @@ func _ready():
 func _process( dt ):
 	last_damage_time += dt
 	
+	#  target
+	if target and weakref( target ).get_ref():
+		$WeaponController.set_pivot_rotation( get_angle_to( target.global_position ) )
+	
+	#  hud
 	var ratio = health / max_health
 	$HUD/HealthRect.rect_scale.x = max( lerp( $HUD/HealthRect.rect_scale.x, ratio, dt * 4 ), 0 )
 	if last_damage_time > .5:
@@ -88,15 +93,22 @@ func take_damage( damage: int, velocity: Vector2 = Vector2.ZERO ):
 func attack( ang: float ):
 	$WeaponController.attack( ang )
 
+func get_angle_to( pos: Vector2 ) -> float:
+	return global_position.angle_to_point( pos )
+
 func attack_at( pos: Vector2 ):
-	attack( global_position.angle_to_point( pos ) )
+	attack( get_angle_to( pos ) )
 
 func set_weapon( weapon: Resource ):
 	$WeaponController.set_weapon( weapon )
 
+func on_stop_target():
+	pass
+
 func get_movement_direction() -> Vector2:
 	if target and weakref( target ).get_ref():
 		if target.position.distance_squared_to( position ) <= stop_target_dist_sqr:
+			on_stop_target()
 			return Vector2.ZERO
 		
 		return position.direction_to( target.position )

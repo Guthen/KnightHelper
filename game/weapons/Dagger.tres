@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource( 1 )
-damage = 5
+damage = 10
 type = "stab"
 image = ExtResource( 2 )
 attack_time = 0.2
 recover_time = 0.1
-knockback_force = 20
+knockback_force = 50
