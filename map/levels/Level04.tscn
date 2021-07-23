@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://game/items/weapons/PlaceableWeapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://character/goblin/Goblin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://map/levels/Level00.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/objects/BreakableWall.tscn" type="PackedScene" id=4]
+
+[node name="Level" instance=ExtResource( 3 )]
+start_items = {
+"BearTrap": 1,
+"Bomb": 1
+}
+
+[node name="FloorMap" parent="." index="0"]
+tile_data = PoolIntArray( 65537, 0, 65536, 65538, 0, 65537, 65539, 0, 131072, 65540, 0, 131072, 65541, 0, 65536, 196604, 0, 131073, 196605, 0, 131073, 196606, 0, 131073, 131073, 0, 131072, 131074, 0, 131073, 131075, 0, 131073, 131076, 0, 131073, 131077, 0, 65537, 131080, 0, 131073, 131081, 0, 131073, 131082, 0, 131073, 262140, 0, 131073, 262141, 0, 131073, 262142, 0, 131073, 262143, 0, 131073, 196608, 0, 131073, 196609, 0, 131072, 196610, 0, 131073, 196611, 0, 65537, 196612, 0, 131073, 196613, 0, 65537, 196614, 0, 131073, 196615, 0, 131073, 196616, 0, 131073, 196617, 0, 131073, 196618, 0, 131073, 327676, 0, 131073, 327677, 0, 131073, 327678, 0, 131073, 327679, 0, 131073, 262145, 0, 65537, 262146, 0, 131073, 262147, 0, 131073, 262148, 0, 131073, 262149, 0, 131072, 262151, 0, 131073, 262152, 0, 131073, 262153, 0, 131073, 262154, 0, 131073, 327681, 0, 65536, 327682, 0, 131072, 327683, 0, 131072, 327684, 0, 131072, 327685, 0, 65536 )
+
+[node name="WallMap" parent="." index="1"]
+tile_data = PoolIntArray( 0, 0, 65538, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 65540, 131067, 0, 65538, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 65540, 65536, 0, 65538, 65542, 0, 65540, 65543, 0, 65538, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 65540, 196603, 0, 65538, 196607, 0, 0, 131072, 0, 0, 131078, 0, 0, 131079, 0, 0, 131083, 0, 65540, 262139, 0, 65538, 196619, 0, 65540, 327675, 0, 65538, 327679, 0, 4, 262144, 0, 2, 262150, 0, 4, 262151, 0, 2, 262155, 0, 65540, 393211, 0, 131074, 393212, 0, 131075, 393213, 0, 131075, 393214, 0, 131075, 393215, 0, 131076, 327680, 0, 65538, 327686, 0, 65540, 327687, 0, 131074, 327688, 0, 131075, 327689, 0, 131075, 327690, 0, 131075, 393216, 0, 131074, 393217, 0, 131075, 393218, 0, 131075, 393219, 0, 131075, 393220, 0, 131075, 393221, 0, 131075, 393222, 0, 131076 )
+
+[node name="Door" parent="WallMap" index="0"]
+position = Vector2( 152, 24 )
+
+[node name="Player" parent="WallMap" index="1"]
+position = Vector2( 56, 52 )
+
+[node name="Goblin2" parent="WallMap" index="2"]
+position = Vector2( 168, 72 )
+is_looking_left = true
+
+[node name="Goblin" parent="WallMap" index="3" instance=ExtResource( 2 )]
+position = Vector2( 168, 36 )
+is_looking_left = true
+
+[node name="Goblin3" parent="WallMap" index="4" instance=ExtResource( 2 )]
+position = Vector2( 136, 52 )
+is_looking_left = true
+
+[node name="PlaceableWeapon" parent="WallMap" index="5" instance=ExtResource( 1 )]
+position = Vector2( -40, 56 )
+is_placeable = false
+
+[node name="BreakableWall" parent="WallMap" index="6" instance=ExtResource( 4 )]
+position = Vector2( 8, 56 )
+
+[node name="Camera" parent="." index="2"]
+position = Vector2( 56, 56 )

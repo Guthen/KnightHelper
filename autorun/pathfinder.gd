@@ -64,6 +64,12 @@ func connect_tiles( tiles: Array = self.tiles ):
 				if tilemap.get_cellv( pos ) == -1:
 					continue
 				
+				if not ( x == 0 ) and not ( y == 0 ):
+					if tilemap.get_cellv( tile + Vector2( x, 0 ) ) == -1:
+						continue
+					if tilemap.get_cellv( tile + Vector2( 0, y ) ) == -1:
+						continue
+				
 				var neigh_id = get_point_id( pos )
 				if astar.has_point( neigh_id ):
 					astar.connect_points( id, neigh_id, true )

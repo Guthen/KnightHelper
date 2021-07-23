@@ -25,6 +25,7 @@ extents = Vector2( 1, 2 )
 
 [node name="BearTrap" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
+item_id = "BearTrap"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 position = Vector2( 0, 4 )

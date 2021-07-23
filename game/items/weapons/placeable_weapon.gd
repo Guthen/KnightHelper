@@ -12,4 +12,5 @@ func _on_PickupArea_body_entered( body: PhysicsBody2D ):
 	
 	if weapon_data:
 		body.call_deferred( "set_weapon", weapon_data )
+		body.get_node( "PickupSoundPlayer" ).play()
 		queue_free()

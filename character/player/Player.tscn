@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://character/player/DarkKnightFrames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://character/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://character/player/player.gd" type="Script" id=3]
 [ext_resource path="res://assets/HitShader.shader" type="Shader" id=4]
+[ext_resource path="res://assets/sounds/pickup01.wav" type="AudioStream" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -25,5 +26,8 @@ animation = "walk"
 
 [node name="HealthRect" parent="HUD" index="2"]
 color = Color( 0.541176, 0.690196, 0.376471, 1 )
+
+[node name="PickupSoundPlayer" type="AudioStreamPlayer2D" parent="." index="7"]
+stream = ExtResource( 5 )
 
 [editable path="WeaponController/Pivot/Pos/Weapon"]

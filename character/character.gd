@@ -8,8 +8,9 @@ export var speed: int = 75
 export var is_looking_left: bool = false
 export var is_freezed: bool = false
 export var velocity: Vector2 = Vector2.ZERO
-export var direction_velocity_draining: float = 3
+export var direction_velocity_draining: float = 5
 export var weapon_data: Resource
+export var team_id: int = -1
 
 onready var game = get_node( "/root/Game" )
 onready var start_dust_particles_x = $DustParticles.position.x
@@ -20,7 +21,7 @@ var direction_velocity: Vector2 = Vector2.ZERO
 var holding_weapon: Node2D
 var last_damage_time: float = 0
 var target: Node2D
-var default_stop_target_dist_sqr: int = 64 ^ 2
+var default_stop_target_dist_sqr: int = pow( 12, 2 )
 var stop_target_dist_sqr: int = default_stop_target_dist_sqr
 var path: PoolVector2Array
 
@@ -83,11 +84,16 @@ func _physics_process( dt ):
 func find_path( pos: Vector2 ):
 	path = Pathfinder.find_path( position, pos )
 	
-#	if self == game.player:
-#		var path_preview = game.get_node( "PathPreview" ) as Line2D
-#		path_preview.clear_points()
-#		for pos in path:
-#			path_preview.add_point( pos )
+	if Pathfinder.debug and self == game.player:
+		var path_preview = game.get_node( "PathPreview" ) as Line2D
+		path_preview.clear_points()
+		for pos in path:
+			path_preview.add_point( pos )
+	
+	return path.size() > 0
+
+func is_team_mate( body: Character ):
+	return team_id > 0 and body.team_id > 0 and team_id == body.team_id
 
 func take_damage( damage: int, velocity: Vector2 = Vector2.ZERO ):
 	health -= damage
@@ -97,6 +103,9 @@ func take_damage( damage: int, velocity: Vector2 = Vector2.ZERO ):
 	self.velocity += velocity
 	if health <= 0:
 		$WeaponController.weapon.toggle_hitbox( false )
+	
+	$HurtSoundPlayer.stream = Utility.hurt_sounds[randi() % len( Utility.hurt_sounds )]
+	$HurtSoundPlayer.play()
 	
 	$AnimatedSprite.material.set_shader_param( "IS_ACTIVE", true )
 	yield( get_tree().create_timer( .25 ), "timeout" )

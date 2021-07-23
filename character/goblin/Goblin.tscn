@@ -15,39 +15,39 @@ shader_param/IGNORE_COLOR = Color( 0.129412, 0.129412, 0.137255, 1 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 11, 15 )
+region = Rect2( 0, 15, 11, 15 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
-region = Rect2( 11, 0, 11, 15 )
+region = Rect2( 11, 15, 11, 15 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 15, 11, 15 )
+region = Rect2( 22, 15, 11, 15 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 11, 15, 11, 15 )
+region = Rect2( 33, 15, 11, 15 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 22, 15, 11, 15 )
+region = Rect2( 0, 0, 11, 15 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
-region = Rect2( 33, 15, 11, 15 )
+region = Rect2( 11, 0, 11, 15 )
 
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
 } ]
 
 [node name="Goblin" groups=[
@@ -58,6 +58,7 @@ health = 20.0
 max_health = 20.0
 speed = 40
 weapon_data = ExtResource( 5 )
+team_id = 1
 
 [node name="AnimatedSprite" parent="." index="2"]
 material = SubResource( 1 )

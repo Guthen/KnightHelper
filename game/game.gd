@@ -1,9 +1,11 @@
 extends Node2D
 
 export var is_running: bool = false setget set_running
-export var level_id: int = 0
+export var level_id: int = -1
 
 onready var viewport_size = get_viewport_rect().size
+onready var scene_transition = $Interface/SceneTransition
+onready var anim_player = $Interface/AnimationPlayer
 
 var level
 var levels = []
@@ -25,13 +27,15 @@ var last_pos: Vector2
 var last_zoom: Vector2
 var last_click_time: int
 var is_paused: bool setget set_pause
-onready var anim_player = $Interface/AnimationPlayer
+
+signal on_game_running
+signal post_game_running
 
 func _ready():
 	$Interface/InventoryPanel/Slot.visible = false
 	
 	#  change level
-	change_level( level_id )
+	change_level( Utility.current_level_id if level_id == -1 else level_id )
 
 func _process( dt ):
 	time += dt
@@ -54,9 +58,15 @@ func _input( event ):
 			elif holding_item and not event.pressed and is_moving_item:
 				drop_holding_item()
 				is_moving_item = false
-	if event is InputEventMouseMotion:
+	elif event is InputEventMouseMotion:
 		if not is_running and holding_item:
 			holding_item.get_node( "HaloSprite" ).self_modulate = Color.green if is_item_placeable( holding_item ) else Color.red
+	elif event is InputEventKey:
+		if event.pressed and event.scancode == KEY_ESCAPE:
+			callback_method = "quit"
+			callback_object = null
+			scene_transition.play( "fade_out" )
+			anim_player.play( "fade_out" )
 
 func set_running( value: bool, animate: bool = false ):
 	if value:
@@ -64,6 +74,9 @@ func set_running( value: bool, animate: bool = false ):
 		packed_scene.pack( get_node( "Level" ) )
 		
 		anim_player.play( "hide" )
+		
+		emit_signal( "on_game_running" )
+		emit_signal( "post_game_running" )
 	else:
 		var level = get_node( "Level" )
 		if level:
@@ -113,7 +126,9 @@ func change_level( level_id ) -> bool:
 		return false
 	
 	#  play fade
+	scene_transition.prepare()
 	anim_player.play( "fade_in" )
+	scene_transition.play( "fade_in" )
 	is_paused = false
 	is_running = false
 	
@@ -121,6 +136,7 @@ func change_level( level_id ) -> bool:
 	var new_level = unpack_level( Utility.levels[level_id], true )
 	
 	self.level_id = level_id
+	Utility.current_level_id = level_id
 	print( "Changed to level %d!" % level_id )
 	
 	#  setup items
@@ -142,6 +158,7 @@ func fade_out( target: Node2D, object: Node = null, method: String = "" ):
 	callback_method = method
 	
 	anim_player.play( "fade_out" )
+	scene_transition.play( "fade_out" )
 
 func setup_inventory_ui():
 	#  clear
@@ -253,10 +270,13 @@ func _on_AnimationPlayer_animation_finished( anim_name ):
 			callback_object.call( callback_method )
 			callback_object = null
 			callback_method = ""
+		elif not callback_object and callback_method == "quit":
+			get_tree().change_scene( "res://menu/MainMenu.tscn" )
 		else:
 			yield( get_tree().create_timer( .5 ), "timeout" )
 			set_running( false, true )
 			anim_player.play( "fade_in" )
+			scene_transition.play( "fade_in" )
 	elif anim_name == "fade_in" && not camera.smoothing_enabled:
 		camera.smoothing_enabled = true
 		camera.position = last_pos

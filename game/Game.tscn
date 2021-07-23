@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/stop.png" type="Texture" id=2]
 [ext_resource path="res://assets/vkx_pixel.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/play.png" type="Texture" id=4]
-[ext_resource path="res://assets/light_mask.png" type="Texture" id=5]
+[ext_resource path="res://menu/SceneTransition.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/game.gd" type="Script" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -28,60 +28,36 @@ font_data = ExtResource( 3 )
 [sub_resource type="Animation" id=7]
 resource_name = "fade_in"
 tracks/0/type = "value"
-tracks/0/path = NodePath("SceneTransition/Control/CircleMask:texture_scale")
+tracks/0/path = NodePath("InventoryPanel:rect_position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( -2, 1 ),
-"update": 0,
-"values": [ 0.01, 30.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SceneTransition/Control/CircleMask:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( -2, 1 ),
-"update": 0,
-"values": [ 270.0, 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("InventoryPanel:rect_position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 200.0 ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("StopControl:rect_position:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("StopControl:rect_position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 320.0 ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("RunControl:rect_position:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("RunControl:rect_position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -91,48 +67,24 @@ tracks/4/keys = {
 [sub_resource type="Animation" id=8]
 resource_name = "fade_out"
 tracks/0/type = "value"
-tracks/0/path = NodePath("SceneTransition/Control/CircleMask:texture_scale")
+tracks/0/path = NodePath("StopControl:rect_position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( -2, 1 ),
-"update": 0,
-"values": [ 30.0, 0.01 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SceneTransition/Control/CircleMask:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( -2, 1 ),
-"update": 0,
-"values": [ 0.0, 270.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("StopControl:rect_position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 320.0 ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("RunControl:rect_position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("RunControl:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -389,34 +341,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SceneTransition" type="Node" parent="Interface"]
-
-[node name="Control" type="Control" parent="Interface/SceneTransition"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CircleMask" type="Light2D" parent="Interface/SceneTransition/Control"]
-rotation = 4.71239
-texture = ExtResource( 5 )
-texture_scale = 0.01
-mode = 3
-range_item_cull_mask = 2
-
-[node name="Overlay" type="ColorRect" parent="Interface/SceneTransition"]
-light_mask = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="SceneTransition" parent="Interface" instance=ExtResource( 5 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Interface"]
 anims/fade_in = SubResource( 7 )

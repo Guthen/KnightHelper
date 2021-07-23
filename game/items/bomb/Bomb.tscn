@@ -22,6 +22,7 @@ colors = PoolColorArray( 1, 0.496918, 0.179688, 1, 1, 0.954178, 0.0976563, 1 )
 script = ExtResource( 3 )
 can_place_on_floor = false
 reset_z_index = false
+item_id = "Bomb"
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 position = Vector2( 0.5, 3 )
@@ -64,5 +65,7 @@ scale_amount_curve = SubResource( 3 )
 color_ramp = SubResource( 4 )
 hue_variation = 0.1
 hue_variation_random = 1.0
+
+[node name="ExplosionSoundPlayer" type="AudioStreamPlayer2D" parent="." index="5"]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

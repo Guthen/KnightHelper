@@ -1,7 +1,24 @@
 extends Node
 
+var current_level_id: int = 0
 var levels = []
 var items = {}
+
+var hurt_sounds = [
+	preload( "res://assets/sounds/hurt01.wav" ),
+	preload( "res://assets/sounds/hurt02.wav" ),
+	preload( "res://assets/sounds/hurt03.wav" ),
+]
+
+var explosion_sounds = [
+	preload( "res://assets/sounds/explosion01.wav" ),
+	preload( "res://assets/sounds/explosion02.wav" ),
+]
+
+var select_sounds = [
+	preload( "res://assets/sounds/select01.wav" ),
+	preload( "res://assets/sounds/select02.wav" ),
+]
 
 var font = DynamicFont.new() 
 

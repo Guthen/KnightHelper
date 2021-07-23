@@ -25,27 +25,29 @@ func _process( dt ):
 		return
 	
 	var item_res = get_nearest_item()
+	var can_access_to_item = false
+	if item_res[0]:
+		can_access_to_item = find_path( item_res[0].position )
 	
 	#  attack nearest enemy
 	if weapon_data:
 		var enemy_res = get_nearest_enemy()
-		if enemy_res[1] < item_res[1]:
-			target = enemy_res[0]
+		if enemy_res[0] and ( not can_access_to_item or enemy_res[1] < item_res[1] ):
 			stop_target_dist_sqr = default_stop_target_dist_sqr
-			find_path( target.position )
+			if find_path( enemy_res[0].position ):
+				target = enemy_res[0]
 			return
 	
 	#  go to door
 	stop_target_dist_sqr = 0
-	if game.door.position.distance_squared_to( position ) < item_res[1]:
-		target = game.door
-		find_path( target.position )
-		path.remove( len( path ) - 1 )
+	if not can_access_to_item or game.door.position.distance_squared_to( position ) < item_res[1]:
+		if find_path( game.door.position ):
+			target = game.door
+			path.remove( len( path ) - 1 )
 		return
 	
 	#  go to the item
 	target = item_res[0]
-	find_path( target.position )
 
 func on_stop_target():
 	if is_freezed:

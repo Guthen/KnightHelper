@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://character/character.gd" type="Script" id=1]
 [ext_resource path="res://character/player/player.png" type="Texture" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://character/weapon_controller.gd" type="Script" id=4]
 [ext_resource path="res://game/items/weapons/Weapon.tscn" type="PackedScene" id=5]
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=1]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Pos:rotation_degrees")
 tracks/0/interp = 1
@@ -32,7 +32,7 @@ tracks/1/keys = {
 "values": [ 0.0, 3.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
@@ -58,7 +58,7 @@ tracks/1/keys = {
 "values": [ 0.0, 50.0 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
@@ -84,54 +84,57 @@ tracks/1/keys = {
 "values": [ 0.0, -50.0 ]
 }
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.25165, 0.0, 0, 0 ]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/IS_ACTIVE = false
 shader_param/REPLACE_COLOR = Color( 1, 1, 1, 1 )
 shader_param/IGNORE_COLOR = Color( 0.129412, 0.129412, 0.137255, 1 )
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 11, 15 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 11, 0, 11, 15 )
-
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 15, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
 region = Rect2( 11, 15, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
 region = Rect2( 22, 15, 11, 15 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
 region = Rect2( 33, 15, 11, 15 )
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 11, 15 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 11, 0, 11, 15 )
+
+[sub_resource type="SpriteFrames" id=12]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 4.5, 6 )
+
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 5.5, 2 )
 
 [node name="Character" type="KinematicBody2D"]
@@ -142,9 +145,9 @@ script = ExtResource( 1 )
 script = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WeaponController"]
-anims/stab = SubResource( 11 )
-anims/swing_1 = SubResource( 12 )
-anims/swing_2 = SubResource( 13 )
+anims/stab = SubResource( 1 )
+anims/swing_1 = SubResource( 2 )
+anims/swing_2 = SubResource( 3 )
 
 [node name="Pivot" type="Node2D" parent="WeaponController"]
 
@@ -168,18 +171,27 @@ initial_velocity = 10.0
 angular_velocity = 200.0
 scale_amount = 1.5
 scale_amount_random = 1.0
-scale_amount_curve = SubResource( 1 )
+scale_amount_curve = SubResource( 4 )
 color = Color( 0.94902, 0.941176, 0.898039, 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 5 )
 position = Vector2( 0, -2 )
-frames = SubResource( 9 )
+frames = SubResource( 12 )
 animation = "idle"
+
+[node name="Hitbox" type="Area2D" parent="."]
+modulate = Color( 1, 0.960784, 0, 1 )
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0.5, 0 )
+shape = SubResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 4 )
-shape = SubResource( 10 )
+shape = SubResource( 13 )
 
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
@@ -221,5 +233,7 @@ color = Color( 0.705882, 0.321569, 0.321569, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HurtSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 
 [editable path="WeaponController/Pivot/Pos/Weapon"]
